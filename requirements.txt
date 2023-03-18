@@ -2,7 +2,6 @@ pandas
 sklearn
 numpy
 matplotlib
-collections
 streamlit
 sqlite3matplotlib
 seaborn
