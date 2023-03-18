@@ -3,5 +3,5 @@ scikit-learn
 numpy
 matplotlib
 streamlit
-sqlite3matplotlib
+sqlite3
 seaborn
