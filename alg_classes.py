@@ -45,10 +45,14 @@ def balance_classes(df, target_col):
 
 def remove_outliers(df, k=1.5):
     df_out = df.copy()
-    numeric_cols = df.select_dtypes(include='number').columns
-    for col in numeric_cols:
-        z_scores = np.abs((df[col] - df[col].mean()) / df[col].std())
-        df_out = df[z_scores < 3]  # Keep only data points within 3 standard deviations from the mean
+    for col in df.columns:
+        if pd.api.types.is_numeric_dtype(df[col]):
+            Q1 = df[col].quantile(0.25)
+            Q3 = df[col].quantile(0.75)
+            IQR = Q3 - Q1
+            low_fence = Q1 - k * IQR
+            high_fence = Q3 + k * IQR
+            df_out[col] = df_out[col].apply(lambda x: df_out[col].mean() if x < low_fence or x > high_fence else x)
     return df_out
 
 def transform_qualitative_to_quantitative(df):
