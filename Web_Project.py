@@ -612,7 +612,7 @@ def main():
     st.write("*Upload your Data, use the sidebar to explore it and clean it, and scroll down to train a machine learning model on your cleaned data*")
     st.subheader('Upload your file')
     st.set_option('deprecation.showfileUploaderEncoding', False)
-    file = st.file_uploader(" ", type=['csv', 'xlsx', 'json', 'db', 'sqlite', 'sqlite3','data'])
+    file = st.file_uploader(" ", type=['csv', 'xlsx', 'json', 'db', 'sqlite', 'sqlite3','data','xls'])
     # Add a checkbox for header
     if file:
         if file is not None:
@@ -710,6 +710,15 @@ def main():
                     else:
                         data = before_balance
 
+                        
+                    before_removing_outliers = data
+                    remove_outliers_checkbox = st.checkbox('Remove outliers')
+                    if remove_outliers_checkbox:
+                        data = remove_outliers(data, k=1.5)
+                    else:
+                        data = before_removing_outliers
+                        
+                        
                     st.write("Here is your data:")
                     st.write(data)
                     supervised = class_supervised_classification(data, output_col)
