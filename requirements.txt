@@ -4,6 +4,5 @@ numpy
 matplotlib
 collections
 streamlit
-sqlite3matplotlib.pyplot
+sqlite3matplotlib
 seaborn
-alg_classes
